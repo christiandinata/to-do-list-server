@@ -27,5 +27,6 @@
     "nodemon": "^2.0.15",
     "react": "^17.0.2",
     "sequelize": "^6.19.0"
-  }
+  },
+  "heroku-run-build-script": true
 }
