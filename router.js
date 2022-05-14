@@ -12,7 +12,7 @@ module.exports = function (app) {
   });
 
   app.get("/", function (req, res) {
-    res.send("Server is running on port 8001");
+    res.send("Server is running");
   });
 
   // POST
