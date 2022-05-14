@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 // const { port } = require("./config/port-config");
-const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 3000;
 
 const db = require("./models");
 db.sequelize
@@ -31,6 +31,4 @@ app.enable("trust proxy");
 
 router(app);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
-});
+app.listen(process.env.PORT || 3000);
