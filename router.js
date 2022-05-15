@@ -35,3 +35,11 @@ module.exports = function (app) {
   app.get("/getgroup", [authJwt.verifyToken], Activity.getGroup);
   app.get("/viewactivity", [authJwt.verifyToken], Activity.viewActivity);
 };
+
+// https://to-do-list-server-pplj.herokuapp.com/register
+// https://to-do-list-server-pplj.herokuapp.com/login
+// https://to-do-list-server-pplj.herokuapp.com/addActivity
+// https://to-do-list-server-pplj.herokuapp.com/deleteActivity
+// https://to-do-list-server-pplj.herokuapp.com/viewActivity
+// https://to-do-list-server-pplj.herokuapp.com/addGroup
+// https://to-do-list-server-pplj.herokuapp.com/getGroup
