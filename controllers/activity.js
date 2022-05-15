@@ -18,7 +18,7 @@ exports._addActivity = async function (req, res, next) {
   var added = 0;
 
   log.create({
-    desc: "addActivity",
+    desc: req.body.username + " - addActivity",
   });
 
   for (let i = 0; i < splitKegiatan.length; i++) {
@@ -54,7 +54,7 @@ exports._addActivity = async function (req, res, next) {
 
 exports.viewActivity = async function (req, res, next) {
   log.create({
-    desc: "viewActivity",
+    desc: req.body.username + " - viewActivity",
   });
 
   Activity.findAll({
@@ -77,6 +77,10 @@ exports.viewActivity = async function (req, res, next) {
 // deleteActivity - fungsi menghapus agenda
 
 exports.deleteActivity = async function (req, res, next) {
+  log.create({
+    desc: req.body.username + " - deleteActivity",
+  });
+
   Activity.destroy({
     where: {
       username: req.body.username,
@@ -95,6 +99,10 @@ exports.deleteActivity = async function (req, res, next) {
 // addGroup - fungsi untuk menambah grup
 
 exports._addGroup = async function (req, res, next) {
+  log.create({
+    desc: req.body.username + " - addGroup",
+  });
+
   const username = req.body.username.split(",");
 
   listGroup.create({
@@ -111,6 +119,10 @@ exports._addGroup = async function (req, res, next) {
 };
 
 exports.getGroup = async function (req, res, next) {
+  log.create({
+    desc: req.body.username + " - getGroup",
+  });
+
   Group.findAll({
     where: {
       username: req.body.username,

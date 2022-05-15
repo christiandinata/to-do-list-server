@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const db = require("../models");
 const config = require("../config/auth-config");
 const User = db.user;
+const log = db.log;
 const Op = db.Sequelize.Op;
 const bcrypt = require("bcrypt");
 const generateAccessToken = require("./generateAccessToken");
@@ -25,6 +26,10 @@ exports._register = async function (req, res, next) {
 };
 
 exports._login = async function (req, res, next) {
+  log.create({
+    desc: req.body.username + " - login",
+  });
+
   User.findOne({
     where: {
       username: req.body.username,
@@ -56,6 +61,10 @@ exports._login = async function (req, res, next) {
 
 // LOGOUT
 exports.logout = async function (req, res, next) {
+  log.create({
+    desc: "logout",
+  });
+
   let token = req.headers["x-access-token"];
   jwt.sign(token, config.secret, { expiresIn: 1 }, (err, decoded) => {
     return res.status(200).send({ message: "You have been logged out" });
