@@ -99,11 +99,11 @@ exports.deleteActivity = async function (req, res, next) {
 // addGroup - fungsi untuk menambah grup
 
 exports._addGroup = async function (req, res, next) {
-  log.create({
-    desc: req.body.username + " - addGroup",
-  });
-
   const username = req.body.username.split(",");
+
+  log.create({
+    desc: username[0] + " - addGroup",
+  });
 
   listGroup.create({
     nama_grup: req.body.nama_grup,
