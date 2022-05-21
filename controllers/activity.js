@@ -61,6 +61,7 @@ exports.viewActivity = async function (req, res, next) {
     where: {
       username: req.body.username,
       tanggal: req.body.tanggal,
+      kategori: req.body.kategori,
     },
   })
     .then((kegiatan) => {
