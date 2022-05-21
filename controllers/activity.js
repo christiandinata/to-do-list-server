@@ -159,3 +159,22 @@ exports.getGroup = async function (req, res, next) {
     })
     .catch((err) => console.log({ message: err.message }));
 };
+
+exports.getMember = async function (req, res, next) {
+  log.create({
+    desc: req.body.username + " - getMember",
+  });
+
+  Group.findAll({
+    where: {
+      nama_grup: req.body.nama_grup,
+    },
+  })
+    .then((member) => {
+      if (!member.length) {
+        return res.status(404).send({ message: "Group doesn't exist" });
+      }
+      return res.status(200).send({ member: member });
+    })
+    .catch((err) => console.log({ message: err.message }));
+};
