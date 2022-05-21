@@ -37,7 +37,8 @@ router(app);
 app.listen(process.env.PORT || 3000);
 
 // Menghapus aktivitas yang sudah lewat dari 7 hari
-cron.schedule("* * * * *", function () {
+// Fungsi dijalankan setiap pukul 00.00
+cron.schedule("0 0 * * *", function () {
   Activity.destroy({
     where: {
       tanggal: {
