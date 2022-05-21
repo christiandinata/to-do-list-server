@@ -1,3 +1,7 @@
+const cron = require("node-cron");
+const db = require("./models");
+const Op = db.Sequelize.Op;
+const Activity = db.activity;
 const express = require("express");
 const app = express();
 
@@ -8,7 +12,6 @@ const cors = require("cors");
 // const { port } = require("./config/port-config");
 // const PORT = process.env.PORT || 3000;
 
-const db = require("./models");
 db.sequelize
   .sync()
   .then(() => {
@@ -32,3 +35,18 @@ app.enable("trust proxy");
 router(app);
 
 app.listen(process.env.PORT || 3000);
+
+// Menghapus aktivitas yang sudah lewat dari 7 hari
+cron.schedule("* * * * *", function () {
+  Activity.destroy({
+    where: {
+      tanggal: {
+        [Op.lte]: new Date() - 7 * 24 * 60 * 60 * 1000,
+      },
+    },
+  })
+    .then((result) => {
+      console.log("Activities 1 week old have been removed");
+    })
+    .catch((err) => console.log({ message: err.message }));
+});
