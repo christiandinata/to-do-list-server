@@ -57,22 +57,42 @@ exports.viewActivity = async function (req, res, next) {
     desc: req.body.username + " - viewActivity",
   });
 
-  Activity.findAll({
-    where: {
-      username: req.body.username,
-      tanggal: req.body.tanggal,
-      kategori: req.body.kategori,
-    },
-  })
-    .then((kegiatan) => {
-      if (!kegiatan.length) {
-        return res.status(404).send({ message: "Not found" });
-      }
-      return res.status(200).send({
-        kegiatan,
-      });
+  if (req.body.kategori == "PERSONAL") {
+    Activity.findAll({
+      where: {
+        username: req.body.username,
+        tanggal: req.body.tanggal,
+        kategori: req.body.kategori,
+      },
     })
-    .catch((err) => console.log({ message: err.message }));
+      .then((kegiatan) => {
+        if (!kegiatan.length) {
+          return res.status(404).send({ message: "Not found" });
+        }
+        return res.status(200).send({
+          kegiatan,
+        });
+      })
+      .catch((err) => console.log({ message: err.message }));
+  } else {
+    Activity.findAll({
+      where: {
+        username: req.body.username,
+        tanggal: req.body.tanggal,
+        kategori: req.body.kategori,
+        nama_grup: req.body.nama_grup,
+      },
+    })
+      .then((kegiatan) => {
+        if (!kegiatan.length) {
+          return res.status(404).send({ message: "Not found" });
+        }
+        return res.status(200).send({
+          kegiatan,
+        });
+      })
+      .catch((err) => console.log({ message: err.message }));
+  }
 };
 
 // deleteActivity - fungsi menghapus agenda
