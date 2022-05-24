@@ -33,7 +33,7 @@ module.exports = function (app) {
 
   // GET
   app.get("/getgroup", [authJwt.verifyToken], Activity.getGroup);
-  app.get("/getMember", [authJwt.verifyToken], Activity.getMember);
+  app.get("/getmember", [authJwt.verifyToken], Activity.getMember);
   app.get("/viewactivity", [authJwt.verifyToken], Activity.viewActivity);
 };
 
