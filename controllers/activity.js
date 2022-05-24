@@ -126,10 +126,6 @@ exports._addGroup = async function (req, res, next) {
     desc: username[0] + " - addGroup",
   });
 
-  listGroup.create({
-    nama_grup: req.body.nama_grup,
-  });
-
   for (let i = 0; i < username.length; i++) {
     Group.create({
       nama_grup: req.body.nama_grup,
