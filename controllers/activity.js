@@ -77,7 +77,6 @@ exports.viewActivity = async function (req, res, next) {
   } else {
     Activity.findAll({
       where: {
-        username: req.body.username,
         tanggal: req.body.tanggal,
         kategori: req.body.kategori,
         nama_grup: req.body.nama_grup,
